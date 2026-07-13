@@ -1,0 +1,14 @@
+# total bill and number of people
+bill_total = 1000 #ETB
+people = 4
+# list of friends
+names =["Dani", "Sara", "Mati", "Biruk"]
+# function
+def split_bill(total, people, tip_rate=0.10):
+    total_with_tip = total + (total * tip_rate)
+    return total_with_tip / people
+# Calculate each person's share
+share = split_bill(bill_total, people)
+# Print the result
+for name in names:
+    print(f"{name} should pay: {share:.2f} ETB")
