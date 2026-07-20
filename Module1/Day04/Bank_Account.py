@@ -12,12 +12,12 @@ class Account:
     def deposite (self, amount):
         if amount <= 0:
             raise ValueError("Amount must be greaterthan 0")
-        self._balance += amount 
+        self._balance + amount 
     
     def withdraw(self, amount):
         if amount <= 0:
             raise ValueError("Insufficiet Balance")
-        self._balance -= amount
+        self._balance - amount
 
     def statement(self):
         print("Owner.", self.owner)
