@@ -1,3 +1,4 @@
+# DAY 5 CODE 
 class Account:
     def __init__(self, owner, number, balance=0):
         self.owner = owner
@@ -78,3 +79,53 @@ accounts = [savings, current]
 for acc in accounts:
     acc.statement()
     print()  # Prints an empty line between accounts
+
+
+# DAY 6 CODE
+
+def subscribe(self, observer):
+    if not hasattr(self, "_observers"):
+        self._observers = []
+    self._observers.append(observer)
+
+def _notify(self, event):
+    if hasattr(self, "_observers"):
+        for observer in self._observers:
+            observer.update(event)
+
+Account.subscribe = subscribe
+Account._notify = _notify
+
+_orig_deposit = Account.deposit
+def _deposit_with_notify(self, amount):
+    _orig_deposit(self, amount)
+    self._notify(f"+{amount} ETB to {self.account_number}")
+
+_orig_withdraw_current = CurrentAccount.withdraw
+def _withdraw_with_notify_current(self, amount):
+    _orig_withdraw_current(self, amount)
+    self._notify(f"-{amount} ETB from {self.account_number}")
+
+Account.deposit = _deposit_with_notify
+CurrentAccount.withdraw = _withdraw_with_notify_current
+
+class AccountFactory:
+    @staticmethod
+    def create(kind, owner, number, balance=0):
+        if kind == "savings":
+            return SavingsAccount(owner, number, balance)
+        if kind == "current":
+            return CurrentAccount(owner, number, balance)
+        raise ValueError(f"Unknown type: {kind}")
+
+
+class SMSAlert:
+    def update(self, event):
+        print(f"[CBE SMS] {event}")
+
+
+class AuditLog:
+    def update(self, event):
+        print(f"[Log] {event}")
+
+
