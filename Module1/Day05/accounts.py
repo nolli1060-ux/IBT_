@@ -62,19 +62,28 @@ class CurrentAccount(Account):
         print("--- Current Account ---")
         super().statement()
 
-# Polymorphic Loop 
-print("--- Creating Accounts ---")
-savings = SavingsAccount("Matiyas", "100077222209", 1000, 0.05)
-current = CurrentAccount("Getachew", "100017828337", 200, 500)
+# ==========================================
+# DEMO / VERIFICATION (Day 5 Only)
+# ==========================================
+if __name__ == "__main__":
+    print("=" * 50)
+    print("DAY 05: Base Account Classes")
+    print("=" * 50)
+    
+    print("\n--- Creating Accounts ---")
+    savings = SavingsAccount("Matiyas", "100077222209", 1000, 0.05)
+    current = CurrentAccount("Getachew", "100017828337", 200, 500)
 
-# specific features
-savings.add_interest()
-current.withdraw(400) # Uses 200 from balance and 200 from overdraft
-print("\n--- Driving via Polymorphic Loop ---")
-# Create a mixed list of different account objects
-accounts = [savings, current]
+    # specific features
+    print("\n--- Performing Transactions ---")
+    savings.add_interest()
+    current.withdraw(400)  # Uses 200 from balance and 200 from overdraft
+    
+    print("\n--- Account Statements ---")
+    # Create a mixed list of different account objects
+    accounts = [savings, current]
 
-# Loop through them all and call statement()
-for acc in accounts:
-    acc.statement()
-    print()  # Prints an empty line between accounts
+    # Loop through them all and call statement()
+    for acc in accounts:
+        acc.statement()
+        print()  # Prints an empty line between accounts
